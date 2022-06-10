@@ -6,8 +6,6 @@ import React, {
   useState,
 } from 'react';
 import { AgGridReact } from 'ag-grid-react';
-import "ag-grid-enterprise"
-
 export default function App() {
   const gridRef = useRef();
   const [rowData, setRowData] = useState([
@@ -15,18 +13,10 @@ export default function App() {
     { make: 'Toyota', model: 'Celica', price: '45000' },
     { make: 'BMV', model: '4 Series', price: '50000' },
   ]);
-  // console.log(rowData)
   const [columnDefs, setColumnDefs] = useState([
-    { field: 'athlete' },
-    { field: 'age' },
-    { field: 'country' },
-    { field: 'year' },
-    { field: 'date' },
-    { field: 'sport' },
-    { field: 'gold' },
-    { field: 'silver' },
-    { field: 'bronze' },
-    { field: 'total' },
+    { field: 'make' },
+    { field: 'price' },
+    { field: 'model' },
   ]);
 
   const defaultColDef = useMemo(() => ({ sortable: true, filter: true }), []);
@@ -35,9 +25,9 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    fetch('https://www.ag-grid.com/example-assets/olympic-winners.json')
+    fetch('https://www.ag-grid.com/example-assets/row-data.json')
       .then((result) => result.json())
-      .then((rowData) => { console.log(rowData);setRowData(rowData)});
+      .then((rowData) => setRowData(rowData));
   }, []);
 
   const pushMeClicked = useCallback((e) => {
